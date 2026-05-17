@@ -53,7 +53,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                     <li><a href="getByUserId.action"><i class="fa fa-home"></i> <span>主页</span></a></li>
                     <li><a href="updateProj.action"><i class="fa fa-laptop"></i> <span>评价项目</span></a>
                     </li>
-                    <li><a href=""><i class="fa fa-book"></i> <span>监测任务</span></a>
+                    <li><a href="queryProj.action"><i class="fa fa-book"></i> <span>监测任务</span></a>
                     </li>                    
 					<li><a href="profile.jsp"><i class="fa fa-user"></i> <span>账户信息</span></a>
 					</li>
@@ -115,6 +115,14 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
             
         </div>
         <!-- page heading end-->
+
+        <s:if test="hasActionErrors()">
+            <div class="wrapper">
+                <div class="alert alert-danger">
+                    <s:actionerror/>
+                </div>
+            </div>
+        </s:if>
 
         <div class="wrapper">
             <div class="row">
@@ -191,7 +199,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
         </tr>
         </thead>
         <tbody>
-        <s:iterator value="#session.monitorlist" id="task">
+        <s:iterator value="#session.monitorlist" var="task">
         	<tr>
         		<td><s:property value="#task.monitorName" /> </td>
         		<td><s:property value="#task.area" /> </td>
@@ -281,7 +289,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
         </tr>
         </thead>
         <tbody>
-        <s:iterator value="#session.monitorarea" id="t_dataacquiretask">
+        <s:iterator value="#session.monitorarea" var="t_dataacquiretask">
         	<tr>
         		<td><s:property value="monitorId" /> </td>
         		<td><s:property value="monitorName" /> </td>
