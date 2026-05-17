@@ -1,42 +1,43 @@
-
-RG/.classpath
-*.svn-base
-*.less
-*.scss
-*.jpg
-*.png
-*.db
-*.js
-*.html
-*.css
-*.jar
-*.xml
+# Build output
+target/
+RG/WebRoot/WEB-INF/classes/
 *.class
-*.gif
-*.mex
-*.MF
-RG/WebRoot/My97DatePicker/开发包/readme.txt
-*.md
-*.psd
-*.eot
-*.woff
-*.ttf
-*.otf
-*.ico
-*.txt
-*.fla
-*.php
-*.swf
-*.styl
-*.svg
-*.prefs
-RG/.svn/format
-RG/.svn/entries
-*.name
-*.container
+*.war
+
+# Local dependency/tool cache
+.m2/
+.tools/
+apache-maven-*-bin.zip
+apache-tomcat-*-windows-x64.zip
+
+# IDE metadata
+.idea/
+.vscode/
+*.iml
+RG/.classpath
+RG/.project
+RG/.settings/
 RG/.mystrutsdata
 RG/.mymetadata
 RG/.myhibernatedata
-RG/.project
-RG/.settings/.jsdtscope
+
+# Legacy SVN/MyEclipse leftovers
+.svn/
+RG/.svn/
+*.svn-base
+*.prefs
 *.component
+*.name
+*.container
+
+# Runtime and local data
+*.log
+*.tmp
+*.db
+
+# Design/source assets not required at runtime
+*.psd
+*.fla
+
+# My97DatePicker bundled docs, runtime files remain tracked
+RG/WebRoot/My97DatePicker/开发包/
