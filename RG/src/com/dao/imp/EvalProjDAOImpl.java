@@ -2,11 +2,10 @@ package com.dao.imp;
 
 import java.util.List;
 
-import org.hibernate.Query;
-
 import org.hibernate.Session;
 
 import org.hibernate.Transaction;
+import org.hibernate.query.Query;
 
 import com.dao.EvalProjDAO;
 
@@ -28,9 +27,12 @@ public class EvalProjDAOImpl implements EvalProjDAO {
 		
 		try
 		{
-			Query query = session.createQuery("from TEvaluateprojectinfo where UserId='" + userId +"'");
+			Query<TEvaluateprojectinfo> query = session.createQuery(
+					"from TEvaluateprojectinfo where userId = :userId",
+					TEvaluateprojectinfo.class);
+			query.setParameter("userId", userId);
 			
-			list = (List<TEvaluateprojectinfo>)query.list();
+			list = query.list();
 			
 			tx.commit();
 			
@@ -91,7 +93,7 @@ public class EvalProjDAOImpl implements EvalProjDAO {
 		
 		try
 		{
-			session.update(t);
+			session.merge(t);
 			
 			tx.commit();
 		}

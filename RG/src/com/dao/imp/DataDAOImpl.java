@@ -1,14 +1,11 @@
 package com.dao.imp;
 
-import java.sql.Timestamp;
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 
-import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
+import org.hibernate.query.Query;
 
 import com.dao.DataDAO;
 import com.file.TMonitordata;
@@ -29,16 +26,14 @@ public class DataDAOImpl implements DataDAO
 		
 		try
 		{
-			DateFormat f = new SimpleDateFormat("yyyy-MM-dd");
+			Query<TMonitordata> query = session.createQuery(
+					"from TMonitordata where monitorId = :monitorId and monitorDateTime between :begin and :end",
+					TMonitordata.class);
+			query.setParameter("monitorId", monitorId);
+			query.setParameter("begin", monitorBegin);
+			query.setParameter("end", monitorEnd);
 			
-			f.format(monitorBegin);
-			
-			
-			Query query = session.createQuery("from TMonitordata where monitorid = '"
-					+ monitorId +"' and monitordatetime between '"  + f.format(monitorBegin) + 
-					"' and '" + f.format(monitorEnd) + "'");
-			
-			list = (List<TMonitordata>)query.list();
+			list = query.list();
 			
 			tx.commit();
 		}

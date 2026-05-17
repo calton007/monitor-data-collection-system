@@ -12,5 +12,7 @@ public interface DataAcqDAO {
 	
 	public TDataacquiretask getById(Integer id);
 	
+	public boolean existsByProjectAndMonitor(Integer projectId, Integer monitorId);
+	
 	public void delDataAcq(Integer id, Integer projectId);
 }

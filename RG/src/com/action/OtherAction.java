@@ -3,8 +3,9 @@ package com.action;
 import java.util.Date;
 import java.util.Map;
 
-import com.opensymphony.xwork2.ActionContext;
-import com.opensymphony.xwork2.ActionSupport;
+import org.apache.struts2.ActionContext;
+import org.apache.struts2.ActionSupport;
+import org.apache.struts2.interceptor.parameter.StrutsParameter;
 
 public class OtherAction extends ActionSupport {
 	/**
@@ -16,19 +17,21 @@ public class OtherAction extends ActionSupport {
 	public Date getBegin() {
 		return begin;
 	}
+	@StrutsParameter
 	public void setBegin(Date begin) {
 		this.begin = begin;
 	}
 	public Date getEnd() {
 		return end;
 	}
+	@StrutsParameter
 	public void setEnd(Date end) {
 		this.end = end;
 	}
 	public String submit() throws Exception
 	{
 		Map<String, Object> session = ActionContext.getContext().getSession();
-		if(begin.before(end))
+		if(begin != null && end != null && begin.before(end))
 		{
 			session.put("begin", begin);
 			session.put("end", end);
@@ -36,10 +39,13 @@ public class OtherAction extends ActionSupport {
 		}	
 		else
 		{
-			session.put("begin", "日期有误");
-			session.put("end", "日期有误");
+			session.remove("begin");
+			session.remove("end");
+			addActionError("请选择有效的监测日期，结束日期必须晚于开始日期");
+			return INPUT;
 		}
 		return SUCCESS;
 	}
 
 }
+

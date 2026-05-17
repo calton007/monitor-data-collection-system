@@ -2,11 +2,10 @@ package com.dao.imp;
 
 import java.util.List;
 
-import org.hibernate.Query;
-
 import org.hibernate.Session;
 
 import org.hibernate.Transaction;
+import org.hibernate.query.Query;
 
 import com.dao.DataAcqDAO;
 
@@ -29,9 +28,12 @@ public class DataAcqDAOImpl implements DataAcqDAO {
 		
 		try
 		{
-			Query query = session.createQuery("from TDataacquiretask where projectid = '" + projectId + "'");
+			Query<TDataacquiretask> query = session.createQuery(
+					"from TDataacquiretask where projectId = :projectId",
+					TDataacquiretask.class);
+			query.setParameter("projectId", projectId);
 			
-			t = (List<TDataacquiretask>) query.list();
+			t = query.list();
 			
 			tx.commit();
 		}
@@ -57,7 +59,7 @@ public class DataAcqDAOImpl implements DataAcqDAO {
 		
 		try
 		{
-			session.save(task);
+			session.persist(task);
 			
 			tx.commit();
 		}
@@ -103,6 +105,38 @@ public class DataAcqDAOImpl implements DataAcqDAO {
 	}
 
 	@Override
+	public boolean existsByProjectAndMonitor(Integer projectId, Integer monitorId)
+	{
+		Session session = HibernateSessionFactory.getSession();
+		
+		Transaction tx = session.beginTransaction();
+		
+		try
+		{
+			Query<Long> query = session.createQuery(
+					"select count(t.id) from TDataacquiretask t where t.projectId = :projectId and t.monitorId = :monitorId",
+					Long.class);
+			query.setParameter("projectId", projectId);
+			query.setParameter("monitorId", monitorId);
+			
+			boolean exists = query.uniqueResult() > 0;
+			
+			tx.commit();
+			return exists;
+		}
+		catch(Exception ex)
+		{
+			if(tx != null)
+				tx.rollback();
+			throw ex;
+		}
+		finally
+		{
+			HibernateSessionFactory.closeSession();
+		}
+	}
+
+	@Override
 	public void delDataAcq(Integer id, Integer projectId)
 	{
 		Session session = HibernateSessionFactory.getSession();
@@ -111,11 +145,20 @@ public class DataAcqDAOImpl implements DataAcqDAO {
 		
 		try
 		{
-			Query query = session.createQuery("from TDataacquiretask where projectid = '" + projectId + "' and monitorid = '"+id+"'");
+			Query<TDataacquiretask> query = session.createQuery(
+					"from TDataacquiretask where projectId = :projectId and monitorId = :monitorId",
+					TDataacquiretask.class);
+			query.setParameter("projectId", projectId);
+			query.setParameter("monitorId", id);
 			
-			TDataacquiretask task = (TDataacquiretask)query.list().get(0);			
+			List<TDataacquiretask> tasks = query.list();
+			if (tasks.isEmpty()) {
+				tx.rollback();
+				return;
+			}
+			TDataacquiretask task = tasks.get(0);
 			
-			session.delete(task);
+			session.remove(task);
 			
 			tx.commit();
 		}
