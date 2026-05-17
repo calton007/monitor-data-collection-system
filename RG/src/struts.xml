@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE struts PUBLIC
+    "-//Apache Software Foundation//DTD Struts Configuration 6.0//EN"
+    "https://struts.apache.org/dtds/struts-6.0.dtd">
+<struts>
+  <constant name="struts.devMode" value="false"/>
+  <constant name="struts.i18n.encoding" value="UTF-8"/>
+  <constant name="struts.action.extension" value="action"/>
+  <constant name="struts.allowlist.packageNames" value="com.file"/>
+
+  <package name="rg" namespace="/" extends="struts-default">
+    <action name="login" class="com.action.UserAction" method="login">
+      <result name="success" type="redirectAction">getByUserId</result>
+      <result name="fail">/login.jsp</result>
+      <result name="input">/login.jsp</result>
+    </action>
+
+    <action name="getByUserId" class="com.action.EvalProjAction" method="getByUserId">
+      <result name="success">/index.jsp</result>
+      <result name="login">/login.jsp</result>
+    </action>
+
+    <action name="updateProj" class="com.action.EvalProjAction" method="getByUserId">
+      <result name="success">/pingjiaxiangmu.jsp</result>
+      <result name="login">/login.jsp</result>
+    </action>
+
+    <action name="queryEvalProj" class="com.action.EvalProjAction" method="queryProj">
+      <result name="select">/selectmonitor.jsp</result>
+      <result name="query">/queryproj.jsp</result>
+      <result name="input">/pingjiaxiangmu.jsp</result>
+    </action>
+
+    <action name="updateEvalP" class="com.action.EvalProjAction" method="selectedStatus">
+      <result name="success">/queryproj.jsp</result>
+      <result name="input">/selectmonitor.jsp</result>
+    </action>
+
+    <action name="queryProj" class="com.action.DataAcqAction" method="queryProj">
+      <result name="success">/queryproj.jsp</result>
+      <result name="input">/pingjiaxiangmu.jsp</result>
+    </action>
+
+    <action name="submitdate" class="com.action.OtherAction" method="submit">
+      <result name="success">/selectmonitor.jsp</result>
+      <result name="input">/selectmonitor.jsp</result>
+    </action>
+
+    <action name="getMonitorItem" class="com.action.MonitorAction" method="getMonitorById">
+      <result name="success" type="chain">newDataAcq</result>
+      <result name="input">/selectmonitor.jsp</result>
+    </action>
+
+    <action name="newDataAcq" class="com.action.DataAcqAction" method="newDataAcq">
+      <result name="success">/selectmonitor.jsp</result>
+      <result name="input">/selectmonitor.jsp</result>
+    </action>
+
+    <action name="delDataAcq" class="com.action.DataAcqAction" method="delDataAcq">
+      <result name="success">/selectmonitor.jsp</result>
+      <result name="input">/selectmonitor.jsp</result>
+    </action>
+
+    <action name="getData" class="com.action.DataAction" method="getMonitorData">
+      <result name="success">/monitordata.jsp</result>
+      <result name="input">/queryproj.jsp</result>
+    </action>
+  </package>
+</struts>

@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+        "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+        "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+  <class name="com.file.TMonitorinfo" table="t_monitorinfo">
+    <id name="id" column="Id" type="java.lang.Integer">
+      <generator class="identity"/>
+    </id>
+    <property name="monitorId" column="MonitorId" type="java.lang.Integer"/>
+    <property name="monitorName" column="MonitorName" type="java.lang.String"/>
+    <property name="area" column="Area" type="java.lang.String"/>
+    <property name="monitorItem" column="MonitorItem" type="java.lang.String"/>
+    <property name="monitorStatus" column="MonitorStatus" type="java.lang.String"/>
+  </class>
+</hibernate-mapping>
