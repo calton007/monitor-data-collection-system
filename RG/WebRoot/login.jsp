@@ -38,7 +38,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
             <input type="password" name="password" class="form-control" placeholder="密码">
 
             <button class="btn btn-lg btn-login btn-block" type="submit">
-                <i class="fa fa-check"></i>
+                登录
             </button>           
 
         </div>

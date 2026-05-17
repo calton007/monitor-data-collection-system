@@ -53,7 +53,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                     <li><a href="getByUserId.action"><i class="fa fa-home"></i> <span>主页</span></a></li>
                     <li><a href="updateProj.action"><i class="fa fa-laptop"></i> <span>评价项目</span></a>
                     </li>
-                    <li><a href=""><i class="fa fa-book"></i> <span>监测任务</span></a>
+                    <li><a href="queryProj.action"><i class="fa fa-book"></i> <span>监测任务</span></a>
                     </li>                    
 					<li><a href="profile.jsp"><i class="fa fa-user"></i> <span>账户信息</span></a>
 					</li>
@@ -101,14 +101,27 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
             </div>
             <!-- header section end-->
 
-            <!-- page heading start-->
+        <!-- page heading start-->
         <div class="page-heading">
             <h3>
-                评价项目
+                <s:if test="#session.taskEntry == true">
+                    选择项目查看监测任务
+                </s:if>
+                <s:else>
+                    评价项目
+                </s:else>
             </h3>
             
         </div>
         <!-- page heading end-->
+
+        <s:if test="hasActionErrors()">
+            <div class="wrapper">
+                <div class="alert alert-danger">
+                    <s:actionerror/>
+                </div>
+            </div>
+        </s:if>
 
         <!--body wrapper start-->
         <div class="wrapper">
@@ -130,7 +143,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
         </tr>
         </thead>
         <tbody>
-        <s:iterator value="#session.list" id="t_evaluateprojectinfo">
+        <s:iterator value="#session.list" var="t_evaluateprojectinfo">
         	<tr>
         		<td><s:property value="projectId" /> </td>
         		<td><s:property value="projectName" /> </td>

@@ -49,7 +49,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                     <li><a href="getByUserId.action"><i class="fa fa-home"></i> <span>主页</span></a></li>
                     <li><a href="updateProj.action"><i class="fa fa-laptop"></i> <span>评价项目</span></a>
                     </li>
-                    <li><a href=""><i class="fa fa-book"></i> <span>监测任务</span></a>
+                    <li><a href="queryProj.action"><i class="fa fa-book"></i> <span>监测任务</span></a>
                     </li>                    
 					<li><a href="profile.jsp"><i class="fa fa-user"></i> <span>账户信息</span></a>
 					</li>

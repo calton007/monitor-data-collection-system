@@ -1,0 +1,5 @@
+@media (max-width: 800px) {
+  .container { display: block; }
+  .left-side { width: 100%; }
+  .table { font-size: 13px; }
+}

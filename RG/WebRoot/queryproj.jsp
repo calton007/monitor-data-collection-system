@@ -53,7 +53,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                     <li><a href="getByUserId.action"><i class="fa fa-home"></i> <span>主页</span></a></li>
                     <li><a href="updateProj.action"><i class="fa fa-laptop"></i> <span>评价项目</span></a>
                     </li>
-                    <li><a href=""><i class="fa fa-book"></i> <span>监测任务</span></a>
+                    <li><a href="queryProj.action"><i class="fa fa-book"></i> <span>监测任务</span></a>
                     </li>                    
 					<li><a href="profile.jsp"><i class="fa fa-user"></i> <span>账户信息</span></a>
 					</li>
@@ -104,7 +104,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
             <!-- page heading start-->
         <div class="page-heading">
             <h3>
-                评价项目
+                监测任务状态
                 <s:a href="./pingjiaxiangmu.jsp">
              <button class="btn btn-primary">
                            					 	返回 
@@ -130,19 +130,19 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                                     <ul class="p-info">
                                         <li>
                                             <div class="title">项目编号</div>
-                                            <s:property value="#session.monitorhead.projectId"/>
+                                            <s:property value="#session.pingjia.projectId"/>
                                         </li>
                                         <li>
                                             <div class="title">项目名</div>
-                                            <s:property value="#session.monitorhead.taskName"/>
+                                            <s:property value="#session.pingjia.projectName"/>
                                         </li>
                                         <li>
                                             <div class="title">地区</div>
-                                            <s:property value="#session.monitorhead.area"/>
+                                            <s:property value="#session.pingjia.area"/>
                                         </li>                                          
                                         <li>
                                             <div class="title">状态</div>
-                                            <s:property value="#session.monitorhead.status"/>
+                                            <s:property value="#session.pingjia.status"/>
                                         </li>                                       
                                         
                                     </ul>
@@ -167,6 +167,16 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
            
         </header>
         <div class="panel-body">
+        <s:if test="#session.hasMonitorTasks != true">
+            <div class="empty-state">
+                <p>当前项目暂无监测任务</p>
+                <div class="empty-actions">
+                    <s:a href="updateProj.action" cssClass="btn">返回评价项目</s:a>
+                    <s:a href="queryEvalProj.action?id=%{#session.pingjia.id}" cssClass="btn btn-primary">选择监测点</s:a>
+                </div>
+            </div>
+        </s:if>
+        <s:else>
         <div class="adv-table">
         <table  class="display table table-bordered table-striped" id="dynamic-table">
         <thead>
@@ -179,7 +189,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
         </tr>
         </thead>
         <tbody>
-        <s:iterator value="#session.monitorlist" id="t">
+        <s:iterator value="#session.monitorlist" var="t">
         	<tr>
         		<td><s:property value="monitorName" /> </td>
         		<td><s:property value="monitorItem" /> </td>
@@ -191,7 +201,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
         			等待结果
         		</s:if>
         		<s:else>
-        			<s:a href="getData.action?monitorId=%{#t.monitorId}&monitorBegin=%{#t.monitorBegin}&monitorEnd=%{#t.monitorEnd}" >查询结果</s:a>
+        			<s:a href="getData.action?id=%{#t.id}" >查询结果</s:a>
         		</s:else>
         		 </td> 
         	</tr>
@@ -200,6 +210,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
         
         </table>
         </div>
+        </s:else>
         </div>
         </section>
         </div>

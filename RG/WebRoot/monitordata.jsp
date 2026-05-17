@@ -24,15 +24,15 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
   
   <script src="js/d3.v3.min.js"></script>
   <style>
-body {
-  font: 10px sans-serif;
-}
-
 .axis path,
 .axis line {
   fill: none;
   stroke: #000;
   shape-rendering: crispEdges;
+}
+
+.axis text {
+  font: 10px sans-serif;
 }
 
 .x.axis path {
@@ -78,7 +78,7 @@ body {
                     <li><a href="getByUserId.action"><i class="fa fa-home"></i> <span>主页</span></a></li>
                     <li><a href="updateProj.action"><i class="fa fa-laptop"></i> <span>评价项目</span></a>
                     </li>
-                    <li><a href=""><i class="fa fa-book"></i> <span>监测任务</span></a>
+                    <li><a href="queryProj.action"><i class="fa fa-book"></i> <span>监测任务</span></a>
                     </li>                    
 					<li><a href="profile.jsp"><i class="fa fa-user"></i> <span>账户信息</span></a>
 					</li>
@@ -141,12 +141,12 @@ body {
         <!-- page heading end-->
 
         <div class="wrapper">
-         <span><font color=black size=6>
-			<center><s:property value="#session.datahead.MonitorItem"/>
+         <div class="chart-title">
+			<s:property value="#session.datahead.MonitorItem"/>
         	<s:date name="#session.datahead.MonitorDateTime"  format="yyyy-MM-dd" nice="false"  /> 至
        		<s:date name="#session.dataend.MonitorDateTime"  format="yyyy-MM-dd" nice="false"  />
-        	统计图</center>
-        	</font> </span>
+        	统计图
+         </div>
         	<chart>
         	</chart>
             
@@ -274,7 +274,7 @@ d3.csv("test.csv", function(error, data) {
         </tr>
         </thead>
         <tbody>
-        <s:iterator value="#session.datalist" id="list">
+        <s:iterator value="#session.datalist" var="list">
         	<tr>
         		<td><s:property value="monitorName" /> </td>
         		<td><s:property value="monitorItem" /> </td>
