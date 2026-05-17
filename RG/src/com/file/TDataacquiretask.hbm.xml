@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+        "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+        "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+  <class name="com.file.TDataacquiretask" table="t_dataacquiretask">
+    <id name="id" column="Id" type="java.lang.Integer">
+      <generator class="identity"/>
+    </id>
+    <property name="taskId" column="TaskId" type="java.lang.Integer"/>
+    <property name="taskName" column="TaskName" type="java.lang.String"/>
+    <property name="projectId" column="ProjectId" type="java.lang.Integer"/>
+    <property name="area" column="Area" type="java.lang.String"/>
+    <property name="monitorId" column="MonitorId" type="java.lang.Integer"/>
+    <property name="monitorName" column="MonitorName" type="java.lang.String"/>
+    <property name="monitorItem" column="MonitorItem" type="java.lang.String"/>
+    <property name="monitorBegin" column="MonitorBegin" type="java.util.Date"/>
+    <property name="monitorEnd" column="MonitorEnd" type="java.util.Date"/>
+    <property name="submitDeadline" column="SubmitDeadline" type="java.sql.Timestamp"/>
+    <property name="status" column="Status" type="java.lang.String"/>
+    <property name="charger" column="Charger" type="java.lang.Integer"/>
+  </class>
+</hibernate-mapping>

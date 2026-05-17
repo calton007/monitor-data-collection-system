@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+        "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+        "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+  <class name="com.file.TEvaluateprojectinfo" table="t_evaluateprojectinfo">
+    <id name="id" column="Id" type="java.lang.Integer">
+      <generator class="identity"/>
+    </id>
+    <property name="projectId" column="ProjectId" type="java.lang.Integer"/>
+    <property name="projectName" column="ProjectName" type="java.lang.String"/>
+    <property name="area" column="Area" type="java.lang.String"/>
+    <property name="submitDate" column="SubmitDate" type="java.sql.Timestamp"/>
+    <property name="submitDeadline" column="SubmitDeadline" type="java.sql.Timestamp"/>
+    <property name="status" column="Status" type="java.lang.String"/>
+    <property name="userId" column="UserId" type="java.lang.Integer"/>
+  </class>
+</hibernate-mapping>
