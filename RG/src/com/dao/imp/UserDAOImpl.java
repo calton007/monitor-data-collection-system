@@ -8,11 +8,10 @@ import com.file.TSystemuser;
 
 import com.util.HibernateSessionFactory;
 
-import org.hibernate.Query;
-
 import org.hibernate.Session;
 
 import org.hibernate.Transaction;
+import org.hibernate.query.Query;
 
 public class UserDAOImpl implements UserDAO {
 
@@ -28,11 +27,15 @@ public class UserDAOImpl implements UserDAO {
 		
 		try
 		{
-			Query query = session.createQuery("from TSystemuser where username = '" + userName + "' and password = '" + password + "'");
+			Query<TSystemuser> query = session.createQuery(
+					"from TSystemuser where userName = :userName and password = :password",
+					TSystemuser.class);
+			query.setParameter("userName", userName);
+			query.setParameter("password", password);
 			
 			List<TSystemuser> list = query.list();
 			
-			if(list!=null )
+			if(list != null && !list.isEmpty())
 			{
 				user = list.get(0);
 	        }				

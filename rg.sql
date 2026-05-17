@@ -13,6 +13,9 @@ File Encoding         : 65001
 Date: 2016-07-01 15:06:22
 */
 
+CREATE DATABASE IF NOT EXISTS `rg` DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
+USE `rg`;
+
 SET FOREIGN_KEY_CHECKS=0;
 
 -- ----------------------------
@@ -20,7 +23,7 @@ SET FOREIGN_KEY_CHECKS=0;
 -- ----------------------------
 DROP TABLE IF EXISTS `t_dataacquiretask`;
 CREATE TABLE `t_dataacquiretask` (
-  `Id` int(11) NOT NULL,
+  `Id` int(11) NOT NULL AUTO_INCREMENT,
   `TaskId` int(11) DEFAULT NULL,
   `TaskName` varchar(30) DEFAULT NULL,
   `ProjectId` int(11) DEFAULT NULL,

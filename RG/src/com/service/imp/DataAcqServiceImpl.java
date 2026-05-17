@@ -34,6 +34,13 @@ public class DataAcqServiceImpl implements DataAcqService {
 	}
 
 	@Override
+	public boolean existsByProjectAndMonitor(Integer projectId, Integer monitorId)
+	{
+		DataAcqDAO dataAcqDAO = new DataAcqDAOImpl();
+		return dataAcqDAO.existsByProjectAndMonitor(projectId, monitorId);
+	}
+
+	@Override
 	public void delDataAcq(Integer id, Integer projectId) 
 	{
 		DataAcqDAO dataAcqDAO = new DataAcqDAOImpl();
