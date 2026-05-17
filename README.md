@@ -1,4 +1,4 @@
-# monitor-data-manage-system
+# monitor-data-collection-system
 
 监测信息获取系统。项目已迁移到 Jakarta 新栈，但架构保持不变：
 
